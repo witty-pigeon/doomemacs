@@ -62,7 +62,9 @@
   ;; it's manpath.
   (when (executable-find "man")
     (setq woman-manpath
-          (split-string (cdr (doom-call-process "man" "--path"))
+          (split-string (cdr (if (or IS-MAC IS-BSD)
+                                 (doom-call-process "manpath")
+                                 (doom-call-process "man" "--path")))
                         path-separator t))))
 
 
